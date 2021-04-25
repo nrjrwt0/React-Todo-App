@@ -47,7 +47,6 @@ function ToDo() {
       <h2>Todo App</h2>
       <ToDoInput handleAdd={handleAdd}/>
       <button onClick={() => setShowCompletedTasks(!showCompletedTasks)}>{!showCompletedTasks ? "Completed Tasks" : "Incomplete Tasks"}</button>
-
       {!showCompletedTasks ? <ToDoList label="INCOMPLETE TODOS" handleToggle={handleToggle} handleDelete={handleDelete} todos={incompletedTodo}/> : <ToDoList label="COMPLETE TODOS" handleToggle={handleToggle} handleDelete={handleDelete} todos={completedTodo}/>}
     </Container>
 
@@ -63,7 +62,6 @@ const Container = styled.div`
   z-index:100;
   background: #000000d0;
   color: white;
-
   border-radius:10px;
   position:relative;
   & > button{
