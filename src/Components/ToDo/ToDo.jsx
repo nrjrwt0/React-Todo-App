@@ -4,6 +4,7 @@ import ToDoList from './ToDoList';
 import {v4 as uuid} from 'uuid'
 import { loadData, saveData } from '../Utils/localStorage';
 import styled from 'styled-components'
+import { MyInfo } from './MyInfo';
 
 function ToDo() {
   const [todos,setTodos] = useState([]);
@@ -47,7 +48,9 @@ function ToDo() {
       <h2>Todo App</h2>
       <ToDoInput handleAdd={handleAdd}/>
       <button onClick={() => setShowCompletedTasks(!showCompletedTasks)}>{!showCompletedTasks ? "Completed Tasks" : "Incomplete Tasks"}</button>
+
       {!showCompletedTasks ? <ToDoList label="INCOMPLETE TODOS" handleToggle={handleToggle} handleDelete={handleDelete} todos={incompletedTodo}/> : <ToDoList label="COMPLETE TODOS" handleToggle={handleToggle} handleDelete={handleDelete} todos={completedTodo}/>}
+      <MyInfo />
     </Container>
 
   )
@@ -57,13 +60,14 @@ export default ToDo;
 
 const Container = styled.div`
   width: 390px;
-  height:560px;
+  height:600px;
   padding:10px 14px;
   z-index:100;
   background: #000000d0;
   color: white;
   border-radius:10px;
   position:relative;
+  overflow:hidden;
   & > button{
     position:absolute;
     right:10px;

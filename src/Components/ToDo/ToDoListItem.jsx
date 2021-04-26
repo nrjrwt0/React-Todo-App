@@ -4,7 +4,7 @@ import styled from 'styled-components'
 function ToDoListItem({title,status,id,handleToggle,handleDelete}) {
     return(
       <Tasks >
-        <p >{title}</p>
+        {status ? <p style={{textDecoration:"line-through"}}>{title}</p> : <p>{title}</p>}
         <div >
           <button  onClick={() => handleToggle(id)}>{!status ? <i className="far fa-check-circle fa-lg" ></i> : <i className="fas fa-check-circle fa-lg"></i>}</button>
           <button onClick={() => handleDelete(id)}><i className="fas fa-trash fa-lg"></i></button>
@@ -30,13 +30,16 @@ const Tasks = styled.div`
     display:flex;
     flex:1;
     justify-content:space-between;
+    align-items:center;
   }
 
   button{
     border:none;
-    background-color:none;
+    background-color:transparent;
     padding:5px;
     margin:0px 3px;
+    height:25px;
+
     i{
       color:tomato;;
     }

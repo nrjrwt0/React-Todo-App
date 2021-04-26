@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 function ToDoList({label,todos,handleToggle,handleDelete}) {
   const [sortBy,setSortBy] = useState("Last Added");
-
+  const [query,setQuery] = useState("");
 
   const handleSorting = (a,b) => {
     if(sortBy === "Ascending"){
@@ -32,6 +32,12 @@ function ToDoList({label,todos,handleToggle,handleDelete}) {
     }
   }
 
+  const handleFilter = (item) => {
+    if(item.title.includes(query)){
+      return item
+    }
+  }
+
   return (
     <Container >
       <div>
@@ -41,9 +47,12 @@ function ToDoList({label,todos,handleToggle,handleDelete}) {
           <option value="Last Added">Last Added</option>
           <option value="First Added">First Added</option>
         </select>
+
+        <input type="text" placeholder="search task" value={query} onChange={(e) => {setQuery(e.target.value)}}/>
+
       </div>
 
-      {todos.sort(handleSorting).map(item => <ToDoListItem key={item.id} {...item} handleToggle={handleToggle} handleDelete={handleDelete}/> )}
+      {todos.filter(handleFilter).sort(handleSorting).map(item => <ToDoListItem key={item.id} {...item} handleToggle={handleToggle} handleDelete={handleDelete}/>)}
     </Container>
 
   )
@@ -54,13 +63,21 @@ export default ToDoList;
 const Container = styled.div`
   max-width:100%;
   max-height:80%;
-  margin:auto;
+  margin:20px auto;
   overflow-y:scroll;
-  scrollbar-color: light;
+  padding-bottom:34px;
 
-  select{
+  & >  div:first-child{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+    input{
+      padding:1px 3px ;
+      outline:none;
+    }
+    select{
     outline:none;
-    margin-bottom:10px;
+    }
   }
-  
 `
